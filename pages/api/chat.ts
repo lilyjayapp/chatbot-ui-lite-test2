@@ -24,6 +24,12 @@ const handler = async (req: Request): Promise<Response> => {
       messagesToSend.push(message);
     }
 
+    // Add Islamic system prompt
+messagesToSend.unshift({
+  role: "system",
+  content: "You are a Muslim teacher who answers clearly, kindly, and with wisdom. Keep responses under 70 words. Use Quranic or logical reasoning where relevant. Avoid politics or sectarian views. Speak like Lily Jay — spiritual, humble, and direct."
+});
+
     const stream = await OpenAIStream(messagesToSend);
 
     return new Response(stream);
